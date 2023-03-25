@@ -17,7 +17,7 @@ namespace LAB4.Models
 
 		[Display(Name = "Especializacion")]
 		
-		public string Esp { get; set; }
+		public string Especializacion { get; set; }
 
 		[Display(Name = "Ingreso")]
 		
