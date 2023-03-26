@@ -1,8 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+
 namespace LAB4.Models
 {
 	public class Pacientes
 	{
+		
+
 		[Display(Name = "Nombre")]
 
 		public string Nombre { get; set; }
@@ -18,6 +22,9 @@ namespace LAB4.Models
 		[Display(Name = "Especializacion")]
 		
 		public string Especializacion { get; set; }
+
+		[Display(Name = "Sexo")]
+		public string Sexo { get; set; }
 
 		[Display(Name = "Ingreso")]
 		
