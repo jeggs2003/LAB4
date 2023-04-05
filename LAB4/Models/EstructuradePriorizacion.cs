@@ -69,8 +69,9 @@
             //Suma de todas las prioridades para determinar cual va primero en la cola
             total = contSexo + contEdad + contEspecializacion + contIngreso;
             //Mandando el total a la clase add del monticulo que determinara el orden de ingreso a la cola
-            MonticuloBinario monticulo = new MonticuloBinario();
-            monticulo.Add(total);
+            MonticuloBinario.Node nodo = new MonticuloBinario.Node(total);
+            MonticuloBinario.MinHeap minheap = new MonticuloBinario.MinHeap();
+            minheap.Add(total);
         }
     }
 }
