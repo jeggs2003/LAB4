@@ -17,7 +17,7 @@ namespace LAB4.Models
 
 		[Display(Name = "Edad")]
 	
-		public int Edad { get; set; }
+		public string Edad { get; set; }
 
 		[Display(Name = "Especializacion")]
 		
@@ -32,7 +32,7 @@ namespace LAB4.Models
 
 		[Display(Name = "Fecha de Nacimiento")]
 
-		public DateTime Nacimiento { get; set; }
+		public string Nacimiento { get; set; }
 
 
 
