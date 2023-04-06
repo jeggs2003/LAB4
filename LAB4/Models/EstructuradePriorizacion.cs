@@ -5,7 +5,7 @@
         public void calculo(Pacientes pacientes)
         {
             string sexo = pacientes.Sexo;
-            int edad = pacientes.Edad;
+            int edad = Convert.ToInt32(pacientes.Edad);
             string especializacion = pacientes.Especializacion;
             string ingreso = pacientes.Ingreso;
             int contSexo = 0, contEdad = 0, contEspecializacion = 0,

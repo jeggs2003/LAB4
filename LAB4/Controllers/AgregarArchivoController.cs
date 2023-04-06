@@ -13,15 +13,13 @@ namespace LAB4.Controllers
 	public class AgregarArchivoController : Controller
 	{
 		public List <Pacientes> pacientes = new List<Pacientes>();
-
+		public ArbolAvl<Pacientes> arbolp = new ArbolAvl<Pacientes>();
 		
 
 
 		public void Agregar(Pacientes pacientes) 
 		{
-			ArbolAvl.arbol.AgregarPaciente(pacientes);
-
-		
+			arbolp.Agregar(pacientes);
 		}
 
 		public Pacientes paciente = new Pacientes();
@@ -38,8 +36,6 @@ namespace LAB4.Controllers
 			paciente.Nacimiento= NacimientoP;
 
 			return paciente;
-
-
 
 		}
 
@@ -79,7 +75,6 @@ namespace LAB4.Controllers
 
 							Agregar(RegistrarPaciente(FilaActual[0], FilaActual[1], FilaActual[2], FilaActual[3], FilaActual[4], FilaActual[5], FilaActual[6]));
 
-
 						}
 					}
 				}
@@ -92,7 +87,7 @@ namespace LAB4.Controllers
 			{
 				ViewBag.Error = "No se ha ingresado la ruta de archivo";
 			}
-			AgregarEnOrden(Agregar.raiz, pacientes);
+			
 			return View(pacientes);
 		}
 

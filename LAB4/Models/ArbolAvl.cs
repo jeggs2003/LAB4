@@ -1,15 +1,15 @@
 ﻿using LAB4.Models;
 namespace LAB4.Models
 {
-	public class ArbolAvl<Pacientes> where Pacientes : IComparable<Pacientes>
+	public class ArbolAvl<T>  
 	{
 		public int Altura { get; set; }
 
 		public Pacientes valor { get; set; }	
 
-		public ArbolAvl<Pacientes> SubarbolDerecho { get; set; }
+		public ArbolAvl<T> SubarbolDerecho { get; set; }
 
-		public ArbolAvl<Pacientes> SubarbolIzquierdo { get; set; }
+		public ArbolAvl<T> SubarbolIzquierdo { get; set; }
 
 		public ArbolAvl()
 		{
@@ -33,21 +33,21 @@ namespace LAB4.Models
 			if (comparacion < 0)
 			{
 				if (SubarbolIzquierdo == null)
-					SubarbolIzquierdo = new ArbolAvl<Pacientes>() { valor = valor };
+					SubarbolIzquierdo = new ArbolAvl<T>() { valor = valor };
 				else
 					SubarbolIzquierdo.Agregar(valor);
 			}
 			else if (comparacion > 0)
 			{
 				if (SubarbolDerecho == null)
-					SubarbolDerecho = new ArbolAvl<Pacientes>() { valor = valor };
+					SubarbolDerecho = new ArbolAvl<T>() { valor = valor };
 				else
 					SubarbolDerecho.Agregar(valor);
 			}
 		}
 
 
-		public ArbolAvl(Pacientes valor, ArbolAvl<Pacientes> SubarbolDerecho, ArbolAvl<Pacientes> SubarbolIzquierdo)
+		public ArbolAvl(Pacientes valor, ArbolAvl<T> SubarbolDerecho, ArbolAvl<T> SubarbolIzquierdo)
 		{
 			this.valor = valor;
 			SubarbolDerecho = SubarbolDerecho;
@@ -55,10 +55,10 @@ namespace LAB4.Models
 		}
 
 
-		private ArbolAvl<Pacientes> Rotar(ArbolAvl<Pacientes> subarbol, bool rotarderecha)
+		private ArbolAvl<T> Rotar(ArbolAvl<T> subarbol, bool rotarderecha)
 		{
 
-			var temporal = new ArbolAvl<Pacientes>();
+			var temporal = new ArbolAvl<T>();
 
 			if (rotarderecha)
 			{
@@ -84,7 +84,7 @@ namespace LAB4.Models
 			else return altura2;
 		}
 
-		private void ActualizarAltura(ArbolAvl<Pacientes> subarbol)
+		private void ActualizarAltura(ArbolAvl<T> subarbol)
 		{
 			if (subarbol != null)
 				subarbol.Altura = Mayor(subarbol.SubarbolDerecho.Altura, subarbol.SubarbolIzquierdo.Altura);

@@ -19,7 +19,7 @@ namespace LAB4.Controllers
 
 		// CREAR PACIENTE
 		[HttpPost]
-		public ActionResult Create(string Nombre, string Apellido, int Edad, string Especializacion, string Ingreso, DateTime Nacimiento)
+		public ActionResult Create(string Nombre, string Apellido, string Edad, string Especializacion, string Ingreso, string Nacimiento)
 		{
 			try
 			{
@@ -35,7 +35,7 @@ namespace LAB4.Controllers
 				};
 
 				// PACIENTE AL ARBOL 
-				ArbolAvl.Agregar(paciente);
+				arbol.Agregar(paciente);
 
 				return RedirectToAction("Index");
 			}

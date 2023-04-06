@@ -1,0 +1,18 @@
+﻿@model ArbolAvl<Pacientes>
+@{
+
+	ViewData["Title"] = "Cargar Archivo";
+}
+<h1>@ViewData["Title"]</h1>
+
+@using (Html.BeginForm("SubirArchivo", "AgregarArchivo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+	<label> Cargar Archivo </label>
+
+	<input type="file" name="archivo" />
+	//Name = Nombre del parametro
+
+	<input type="submit" , value="Enviar" />
+
+}

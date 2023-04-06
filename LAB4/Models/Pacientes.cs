@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace LAB4.Models
 {
-	public class Pacientes
+	public class Pacientes : IComparable
 	{
 		
 
@@ -34,10 +34,9 @@ namespace LAB4.Models
 
 		public string Nacimiento { get; set; }
 
-
-
-
-
-
+		public int CompareTo(object? obj)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
