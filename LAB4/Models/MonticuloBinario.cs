@@ -1,264 +1,112 @@
 ﻿namespace LAB4.Models
 {
-    public class MonticuloBinario
+     static public class MonticuloBinario
     {
-        private List<int> heap;
+         static public List<MonticuloBinarioNode> heap;
 
-        public MonticuloBinario()
+         static MonticuloBinario()
         {
-            heap = new List<int>();
+            heap = new List<MonticuloBinarioNode>();
         }
 
-        
-        public void ola()
+        static public int Count
         {
-
+            get { return heap.Count; }
         }
 
-
-        public class Node
+        static public void Enqueue(int priority, Pacientes paciente)
         {
-            public int value;
-            public Node left;
-            public Node right;
-
-            public Node(int value)
+            MonticuloBinarioNode node = new MonticuloBinarioNode(priority, paciente);
+            heap.Add(node);
+            int i = heap.Count - 1;
+            while (i > 0)
             {
-                this.value = value;
-                left = null;
-                right = null;
-            }
-        }
-
-        public class MinHeap
-        {
-            private Node root;
-
-            public MinHeap()
-            {
-                root = null;
-            }
-
-            public void Add(int value)
-            {
-                Node newNode = new Node(value);
-                if (root == null)
+                int parentIndex = (i - 1) / 2;
+                if (heap[parentIndex].Priority <= node.Priority)
                 {
-                    root = newNode;
+                    break;
                 }
-                else
-                {
-                    Queue<Node> queue = new Queue<Node>();
-                    queue.Enqueue(root);
+                heap[i] = heap[parentIndex];
+                i = parentIndex;
+            }
+            heap[i] = node;
+        }
+        static public List<Pacientes> lispa = new List<Pacientes>();
+        static public List<Pacientes> Salida()
+        {
+            
+            Pacientes paci;
+            for (int i = 0; i < heap.Count; i++)
+            {
+               paci = heap[i].Paciente;
+                int pro = heap[i].Priority;
+               lispa.Add(paci);
+            }
+            return lispa;
+            
+        }
 
-                    while (queue.Count > 0)
+         static public Pacientes Dequeue()
+        {
+            if (heap.Count == 0)
+            {
+                throw new InvalidOperationException("The heap is empty");
+            }
+
+            MonticuloBinarioNode rootNode = heap[0];
+            int lastIndex = heap.Count - 1;
+            MonticuloBinarioNode lastNode = heap[lastIndex];
+            heap.RemoveAt(lastIndex);
+
+            if (lastIndex > 0)
+            {
+                heap[0] = lastNode;
+                int i = 0;
+                while (i < lastIndex)
+                {
+                    int leftChildIndex = 2 * i + 1;
+                    int rightChildIndex = 2 * i + 2;
+
+                    if (rightChildIndex <= lastIndex && heap[rightChildIndex].Priority < heap[leftChildIndex].Priority)
                     {
-                        Node current = queue.Dequeue();
-                        if (current.left == null)
+                        if (heap[rightChildIndex].Priority < lastNode.Priority)
                         {
-                            current.left = newNode;
-                            break;
-                        }
-                        else if (current.right == null)
-                        {
-                            current.right = newNode;
-                            break;
+                            heap[i] = heap[rightChildIndex];
+                            i = rightChildIndex;
+                            continue;
                         }
                         else
                         {
-                            queue.Enqueue(current.left);
-                            queue.Enqueue(current.right);
+                            break;
                         }
                     }
 
-                    MinHeapifyUp(newNode);
-                }
-            }
-
-            public int RemoveMin()
-            {
-                if (root == null)
-                {
-                    throw new InvalidOperationException("The heap is empty.");
-                }
-
-                int min = root.value;
-
-                if (root.left == null)
-                {
-                    root = null;
-                }
-                else
-                {
-                    Queue<Node> queue = new Queue<Node>();
-                    queue.Enqueue(root);
-
-                    Node deepestNode = null;
-                    while (queue.Count > 0)
+                    if (leftChildIndex <= lastIndex && heap[leftChildIndex].Priority < lastNode.Priority)
                     {
-                        deepestNode = queue.Dequeue();
-                        if (deepestNode.left != null)
-                        {
-                            queue.Enqueue(deepestNode.left);
-                        }
-                        if (deepestNode.right != null)
-                        {
-                            queue.Enqueue(deepestNode.right);
-                        }
-                    }
-
-                    root.value = deepestNode.value;
-                    if (deepestNode == root)
-                    {
-                        root = null;
-                    }
-                    else
-                    {
-                        Node parent = FindParent(deepestNode);
-                        if (parent.left == deepestNode)
-                        {
-                            parent.left = null;
-                        }
-                        else
-                        {
-                            parent.right = null;
-                        }
-
-                        MinHeapifyDown(root);
-                    }
-                }
-
-                return min;
-            }
-
-            private void MinHeapifyUp(Node node)
-            {
-                Node current = node;
-                Node parent = FindParent(current);
-
-                while (parent != null && current.value < parent.value)
-                {
-                    Swap(current, parent);
-                    current = parent;
-                    parent = FindParent(current);
-                }
-            }
-
-            private void MinHeapifyDown(Node node)
-            {
-                Node current = node;
-
-                while (current != null)
-                {
-                    Node minChild = FindMinChild(current);
-                    if (minChild != null && minChild.value < current.value)
-                    {
-                        Swap(current, minChild);
-                        current = minChild;
+                        heap[i] = heap[leftChildIndex];
+                        i = leftChildIndex;
                     }
                     else
                     {
                         break;
                     }
                 }
+
+                heap[i] = lastNode;
             }
 
-            private void Swap(Node node1, Node node2)
+            return rootNode.Paciente;
+        }
+
+
+        static public Pacientes Peek()
+        {
+            if (heap.Count == 0)
             {
-                int temp = node1.value;
-                node1.value = node2.value;
-                node2.value = temp;
+                throw new InvalidOperationException("The heap is empty");
             }
 
-            private Node FindParent(Node node)
-            {
-                if (node == root)
-                {
-                    return null;
-                }
-
-                Queue<Node> queue = new Queue<Node>();
-                queue.Enqueue(root);
-
-                while (queue.Count > 0)
-                {
-                    Node current = queue.Dequeue();
-                    if (current.left == node || current.right == node)
-                    {
-                        return current;
-                    }
-                    else
-                    {
-                        if (current.left != null)
-                        {
-                            queue.Enqueue(current.left);
-                        }
-                        if (current.right != null)
-                        {
-                            queue.Enqueue(current.right);
-                        }
-                    }
-                }
-
-                return null; // Si no se encuentra el padre, retorna null
-            }
-
-            private Node FindMinChild(Node node)
-            {
-                if (node == null)
-                {
-                    return null;
-                }
-
-                Node minChild = null;
-
-                if (node.left != null && node.right != null)
-                {
-                    minChild = (node.left.value < node.right.value) ? node.left : node.right;
-                }
-                else if (node.left != null)
-                {
-                    minChild = node.left;
-                }
-                else if (node.right != null)
-                {
-                    minChild = node.right;
-                }
-
-                return minChild;
-            }
-
-            public bool Contains(int value)
-            {
-                return FindNode(root, value) != null;
-            }
-
-            private Node FindNode(Node node, int value)
-            {
-                if (node == null)
-                {
-                    return null;
-                }
-
-                if (node.value == value)
-                {
-                    return node;
-                }
-
-                Node leftResult = FindNode(node.left, value);
-                if (leftResult != null)
-                {
-                    return leftResult;
-                }
-
-                Node rightResult = FindNode(node.right, value);
-                if (rightResult != null)
-                {
-                    return rightResult;
-                }
-
-                return null;
-            }
+            return heap[0].Paciente;
         }
     }
 }

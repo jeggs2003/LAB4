@@ -19,7 +19,7 @@ namespace LAB4.Controllers
 
 		// CREAR PACIENTE
 		[HttpPost]
-		public ActionResult Create(string Nombre, string Apellido, string Edad, string Especializacion, string Ingreso, string Nacimiento)
+		public ActionResult Create(string Nombre, string Apellido, string Edad, string Especializacion, string Ingreso, string Nacimiento, string Sexo)
 		{
 			try
 			{
@@ -29,6 +29,7 @@ namespace LAB4.Controllers
 					Nombre = Nombre,
 					Apellido = Apellido,
 					Edad = Edad,
+					Sexo = Sexo,
 					Especializacion = Especializacion,
 					Ingreso = Ingreso,
 					Nacimiento = Nacimiento

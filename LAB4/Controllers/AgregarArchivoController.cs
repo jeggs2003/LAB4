@@ -14,18 +14,18 @@ namespace LAB4.Controllers
 	{
 		public List <Pacientes> pacientes = new List<Pacientes>();
 		public ArbolAvl<Pacientes> arbolp = new ArbolAvl<Pacientes>();
-		
+		public EstructuradePriorizacion nep = new EstructuradePriorizacion();
 
 
 		public void Agregar(Pacientes pacientes) 
 		{
-			arbolp.Agregar(pacientes);
+			nep.calculo(pacientes);
 		}
 
 		public Pacientes paciente = new Pacientes();
 
 
-		public Pacientes RegistrarPaciente(string NombreP, string ApellidoP, string EdadP, string EspecializacionP, string SexoP, string IngresoP, string NacimientoP)
+		public Pacientes RegistrarPaciente(string NombreP, string ApellidoP, string NacimientoP, string SexoP, string EdadP, string EspecializacionP, string IngresoP)
 		{
 			paciente.Nombre = NombreP;
 			paciente.Apellido = ApellidoP;
@@ -38,7 +38,7 @@ namespace LAB4.Controllers
 			return paciente;
 
 		}
-
+		
 		static public void AgregarEnOrden(NodoAvl nodo, List<Pacientes> lista)
 		{
 			if (nodo != null)
@@ -88,14 +88,14 @@ namespace LAB4.Controllers
 				ViewBag.Error = "No se ha ingresado la ruta de archivo";
 			}
 			
-			return View(pacientes);
+			return View();
 		}
 
 
-		[Route("SubirArchivo")]
 
+        [Route("SubirArchivo")]
 
-		public IActionResult Index()
+        public IActionResult SubirArchivo()
 		{
 			return View();
 		}

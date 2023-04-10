@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@model List<Pacientes>
+@{
+    ViewData["Title"] = "Lista de Pacientes";
+    <h1>Lista Pacientes</h1>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Edad</td>
+                    <td>Especializacion</td>
+                    <td>Sexo</td>
+                    <td>Ingreso</td>
+                    <td>Nacimiento</td>
+                </tr>
+            </thead>
+
+            @foreach (var jugaactual in Model)
+            {
+                <tr>
+                    <td>@jugaactual.Nombre </td>
+                    <td>@jugaactual.Apellido </td>
+                    <td>@jugaactual.Edad </td>
+                    <td>@jugaactual.Especializacion </td>
+                    <td>@jugaactual.Sexo </td>
+                    <td>@jugaactual.Ingreso </td>
+                    <td>@jugaactual.Nacimiento </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+}

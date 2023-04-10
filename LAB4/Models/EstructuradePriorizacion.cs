@@ -1,7 +1,10 @@
-﻿namespace LAB4.Models
+﻿
+
+namespace LAB4.Models
 {
     public class EstructuradePriorizacion
     {
+       
         public void calculo(Pacientes pacientes)
         {
             string sexo = pacientes.Sexo;
@@ -38,16 +41,16 @@
             }
 
             //Condicional para la especializacion
-            if(especializacion == "Traumatologia interna")
+            if(especializacion == "Traumatología (interna)")
             {
                 contEspecializacion = 3;
-            }else if(especializacion == "Traumatologia externa")
+            }else if(especializacion == "Traumatología (expuesta)")
             {
                 contEspecializacion = 8;
-            }else if(especializacion == "Ginecologia")
+            }else if(especializacion == "Ginecología")
             {
                 contEspecializacion = 5;
-            }else if(especializacion == "Cardiologia")
+            }else if(especializacion == "Cardiología")
             {
                 contEspecializacion = 10;
             }
@@ -69,9 +72,9 @@
             //Suma de todas las prioridades para determinar cual va primero en la cola
             total = contSexo + contEdad + contEspecializacion + contIngreso;
             //Mandando el total a la clase add del monticulo que determinara el orden de ingreso a la cola
-            MonticuloBinario.Node nodo = new MonticuloBinario.Node(total);
-            MonticuloBinario.MinHeap minheap = new MonticuloBinario.MinHeap();
-            minheap.Add(total);
+            
+            MonticuloBinario.Enqueue(total, pacientes);
+
         }
     }
 }
